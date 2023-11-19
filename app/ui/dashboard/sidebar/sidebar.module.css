@@ -49,7 +49,7 @@
 }
 
 .links:hover, .active{
-    background-color: #2a3a5e;
+    background-color: var(--hoverColor);
     border-radius: 10px;
 }
 .logout{
