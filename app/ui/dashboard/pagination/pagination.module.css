@@ -8,3 +8,6 @@
     cursor: pointer;
     border: none;
 }
+.button:disabled{
+    cursor: not-allowed;
+}
