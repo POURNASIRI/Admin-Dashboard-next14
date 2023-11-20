@@ -1,4 +1,4 @@
-import React from 'react'
+import styles from '../../ui/dashboard/products/products.module.css'
 
 function Products() {
   return (
