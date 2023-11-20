@@ -2,6 +2,7 @@ import Search from '@/app/ui/dashboard/search/Search'
 import styles from '../../ui/dashboard/users/users.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
+import Pagination from '@/app/ui/dashboard/pagination/pagination'
 
 
 function Users({placeholder}) {
@@ -48,6 +49,7 @@ function Users({placeholder}) {
             </tr>
           </tbody>
         </table>
+        <Pagination/>
     </div>
   )
 }
