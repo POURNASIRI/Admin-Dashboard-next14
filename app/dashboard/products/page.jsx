@@ -9,7 +9,7 @@ function Products() {
     <div className={styles.container}>
     <div className={styles.top}>
       <Search placeholder={"product"}/>
-      <Link href="/dashboard/products/add">
+      <Link href="/dashboard/products/addProduct">
         <button className={styles.addButton}>Add New</button>
       </Link>
     </div>

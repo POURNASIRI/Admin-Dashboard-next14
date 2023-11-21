@@ -1,0 +1,44 @@
+.container{
+    background-color: var(--bgSoft);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form input, 
+.form textarea, 
+.form select{
+    padding: 30px;
+    background-color: transparent;
+    color: var(--textSoft);
+    border-radius: 5px;
+    margin-bottom: 30px;
+    font-size: 1.6rem;
+    border: 2px solid var(--hoverColor);
+    outline: none;
+}
+.form input, .form select{
+    width: 45%;
+}
+.form textarea{
+    width: 100%;
+}
+
+.form input::placeholder{
+    text-transform: capitalize;
+}
+.form button{
+    width: 100%;
+    padding: 30px;
+    background-color: teal;
+    color: var(--text);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
