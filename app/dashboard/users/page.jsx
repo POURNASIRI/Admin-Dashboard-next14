@@ -10,7 +10,7 @@ function Users({placeholder}) {
   return (
     <div className={styles.container}>
         <div className={styles.top}>
-          <Search placeholder={placeholder}/>
+          <Search placeholder={"User"}/>
           <Link href="/dashboard/users/add">
             <button className={styles.addButton}>Add New</button>
           </Link>

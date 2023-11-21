@@ -7,7 +7,7 @@ function Search({placeholder}) {
         <MdSearch size={20}/>
         <input type="text"
         className={styles.input} 
-        placeholder="Search for a User" />
+        placeholder={`Search for a ${placeholder}`} />
     </div>
   )
 }
