@@ -1,8 +1,15 @@
-import React from 'react'
+import styles from '../ui/login/login.module.css'
 
 function Login() {
   return (
-    <div>Login</div>
+    <div className={styles.container}>
+      <form className={styles.form}>
+      <h1>Login</h1>
+          <input type="text" placeholder='username'/>
+          <input type="password" placeholder='password' />
+          <button>Login</button>
+      </form>
+    </div>
   )
 }
 
