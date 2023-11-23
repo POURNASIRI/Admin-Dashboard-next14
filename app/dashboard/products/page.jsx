@@ -5,6 +5,8 @@ import Search from '@/app/ui/dashboard/search/Search'
 import Pagination from '@/app/ui/dashboard/pagination/Pagination'
 
 function Products() {
+
+
   return (
     <div className={styles.container}>
     <div className={styles.top}>

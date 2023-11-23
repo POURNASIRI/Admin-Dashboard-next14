@@ -7,6 +7,7 @@ import { MdNotifications, MdOutlineChat, MdPublic, MdSearch } from "react-icons/
 function Navbar() {
 
     const pathName = usePathname()
+   
 
   return (
     <div className={styles.container}>
