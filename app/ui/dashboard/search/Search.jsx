@@ -3,7 +3,7 @@
 
 import { MdSearch } from 'react-icons/md'
 import styles from './search.module.css'
-import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 function Search({placeholder}) {
 
