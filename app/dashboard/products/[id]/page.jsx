@@ -1,14 +1,28 @@
+import { fetchSingleProductData } from '@/app/lib/data'
 import styles from '@/app/ui/dashboard/products/singleproductpage.module.css'
 import Image from 'next/image'
 
-function SingleProductPage() {
+async function SingleProductPage({params}) {
+    const {id} = params
+    const singleProduct = await fetchSingleProductData(id)
+    const {
+        title,
+        desc,
+        price,
+        stock,
+        img,
+        color,
+        size,
+        createdAt
+    } 
+    = singleProduct
   return (
     <div className={styles.container}>
         <div className={styles.infoContainer}>
             <div className={styles.imgContainer}>
-                <Image src="/noavatar.png" alt='' fill/>
+                <Image src={img || "/noavatar.png"} alt='' fill/>
             </div>
-            Iphone
+            {title}
         </div>
         <div className={styles.formContainer}>
             <form className={styles.form}>

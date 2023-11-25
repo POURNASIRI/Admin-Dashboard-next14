@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Pagination from '../../ui/dashboard/pagination/Pagination'
 import { fetchUserData } from '@/app/lib/data'
+import { DeleteUser } from '@/app/lib/actions'
 
 
 
@@ -55,7 +56,10 @@ async function Users({searchParams}) {
                     <Link href={`/dashboard/users/${user._id}`}>
                       <button className={`${styles.button} ${styles.view}`}>View</button>
                     </Link>
+                    <form action={DeleteUser}>
+                        <input type="text" hidden  name='id' value={user.id}/>
                       <button className={`${styles.button} ${styles.delete}`}>Delete</button>
+                    </form>
                     </div>
                   </td>
                 </tr>

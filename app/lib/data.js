@@ -15,7 +15,22 @@ export const fetchUserData = async (q,page) =>{
     } catch (error) {
         throw new Error("Something Wrong to get user Data please try again!")
     }
-}
+} 
+
+
+export const fetchSingleUserData = async (id) =>{
+   
+
+    try {
+        ConnectToDB()
+        const singleUser = await User.findById(id)
+        return singleUser
+    } catch (error) {
+        throw new Error("Something Wrong to get user Data please try again!")
+    }
+} 
+
+
 export const fetchProductData = async (q,page) =>{
     const regax = new RegExp(q,"i");
 
@@ -28,6 +43,20 @@ export const fetchProductData = async (q,page) =>{
             (page-1))
         return {count,products}
     } catch (error) {
-        throw new Error("Something Wrong to get user Data please try again!")
+        throw new Error("Something Wrong to get product Data please try again!")
     }
 }
+
+
+
+export const fetchSingleProductData = async (id) =>{
+   
+
+    try {
+        ConnectToDB()
+        const singleProduct = await Product.findById(id)
+        return singleProduct
+    } catch (error) {
+        throw new Error("Something Wrong to get product Data please try again!")
+    }
+} 

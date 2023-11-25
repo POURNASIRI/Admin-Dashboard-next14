@@ -1,14 +1,35 @@
+
+
+
+
+import { fetchSingleUserData } from '@/app/lib/data'
 import styles from '@/app/ui/dashboard/users/singleuserpage.module.css'
 import Image from 'next/image'
 
-function SingleUserPage() {
+
+
+ async function SingleUserPage({params}) {
+
+    const {id} = params
+    const singleUser = await fetchSingleUserData (id)
+        const {
+            username,
+            email,
+            password,
+            img,
+            isAdmin,
+            isActive,
+            address,
+            createdAd
+        } = singleUser
+        console.log(img)
   return (
     <div className={styles.container}>
         <div className={styles.infoContainer}>
             <div className={styles.imgContainer}>
-                <Image src="/noavatar.png" alt='' fill/>
+                <Image src={img || "/noavatar.png"} alt='' fill/>
             </div>
-            Erfan
+            {username}
         </div>
         <div className={styles.formContainer}>
             <form className={styles.form}>
@@ -17,7 +38,7 @@ function SingleUserPage() {
             <label>Email</label>
             <input type="email" name='email' placeholder='Erfan@gmail.com' />
             <label>Password</label>
-            <input type="password" name='password' placeholder='Erfan' />
+            <input type="password" name='password' placeholder='password' />
             <label>Phone</label>
             <input type="number" name='phone' />
             <label>Address</label>

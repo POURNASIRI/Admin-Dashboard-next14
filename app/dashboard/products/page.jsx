@@ -4,14 +4,14 @@ import Image from 'next/image'
 import Search from '@/app/ui/dashboard/search/Search'
 import Pagination from '@/app/ui/dashboard/pagination/Pagination'
 import { fetchProductData } from '@/app/lib/data'
+import { DeleteProduct } from '@/app/lib/actions'
 
 async function Products({searchParams}) {
 
     const q =  searchParams?.q || "" ;
     const page =  searchParams?.page || 1 ;
     const {count,products} = await fetchProductData(q,page)
-    console.log(products)
-
+  
   return (
     <div className={styles.container}>
     <div className={styles.top}>
@@ -55,7 +55,10 @@ async function Products({searchParams}) {
             <Link href={`/dashboard/products/${product.id}`}>
               <button className={`${styles.button} ${styles.view}`}>View</button>
             </Link>
+            <form action={DeleteProduct}>
+              <input type="text" hidden value={product.id} name='id' />
               <button className={`${styles.button} ${styles.delete}`}>Delete</button>
+            </form>
             </div>
           </td>
         </tr>
