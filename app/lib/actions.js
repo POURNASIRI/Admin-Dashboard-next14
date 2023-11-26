@@ -9,8 +9,10 @@ export const AddUser  = async (formData)=>{
 
     "use server"
 
-    const {username,email,password,phone,address,isAdmin,isActive} = 
+    const {username,email,password,phoneNumber,address,isAdmin,isActive} =
     Object.fromEntries(formData)
+    
+
     try {
         ConnectToDB()
         const salt = await bcrypt.genSalt(10)
@@ -19,17 +21,54 @@ export const AddUser  = async (formData)=>{
             username,
             email,
             password: hashedPassword,
-            phone,
+            phoneNumber,
             address,
             isAdmin,
             isActive
         })
 
         await newUser.save()
+
+        
         
     } catch (error) {
         console.log(error)
         throw new Error("Failed to  create User Please try again!")
+    }
+    revalidatePath("/dashboard/users")
+    redirect("/dashboard/users")
+
+
+}
+export const UpdateUser  = async (formData)=>{
+
+    "use server"
+    const {id,username,email,password,phoneNumber,address,isAdmin,isActive} = 
+    Object.fromEntries(formData)
+    try {
+        ConnectToDB()
+        const updateFields = {
+            username,
+            email,
+            password,
+            phoneNumber,
+            address,
+            isAdmin,
+            isActive
+        }
+
+        Object.keys(updateFields).forEach(
+            (key)=>
+            (updateFields[key] === "" || undefined) && delete updateFields[key]
+
+        )
+        await User.findByIdAndUpdate(id,updateFields)
+
+      
+        
+    } catch (error) {
+        console.log(error)
+        throw new Error("Failed to  Update User Please try again!")
     }
     revalidatePath("/dashboard/users")
     redirect("/dashboard/users")
@@ -103,4 +142,39 @@ export const DeleteProduct  = async (formData)=>{
     }
     revalidatePath("/dashboard/products")
 
+}
+
+
+export const UpdateProduct  = async (formData)=>{
+
+    "use server"
+
+    const {id,title,desc,price,stock,color,size} = 
+    Object.fromEntries(formData)
+    try {
+        ConnectToDB()
+        const updateFields ={
+            title,
+            desc,
+            price,
+            stock,
+            color,
+            size
+        }
+
+        Object.keys(updateFields).forEach(
+            (key)=>
+            (updateFields[key] === "" ||  undefined) && delete updateFields[key]
+        )
+        
+     
+        await Product.findByIdAndUpdate(id,updateFields)
+        
+        
+    } catch (error) {
+        console.log(error)
+        throw new Error("Failed to  create Product Please try again!")
+    }
+    revalidatePath("/dashboard/products")
+    redirect("/dashboard/products")
 }

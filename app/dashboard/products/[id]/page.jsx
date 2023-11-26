@@ -1,3 +1,4 @@
+import { UpdateProduct } from '@/app/lib/actions'
 import { fetchSingleProductData } from '@/app/lib/data'
 import styles from '@/app/ui/dashboard/products/singleproductpage.module.css'
 import Image from 'next/image'
@@ -5,37 +6,29 @@ import Image from 'next/image'
 async function SingleProductPage({params}) {
     const {id} = params
     const singleProduct = await fetchSingleProductData(id)
-    const {
-        title,
-        desc,
-        price,
-        stock,
-        img,
-        color,
-        size,
-        createdAt
-    } 
-    = singleProduct
+
+  
   return (
     <div className={styles.container}>
         <div className={styles.infoContainer}>
             <div className={styles.imgContainer}>
-                <Image src={img || "/noavatar.png"} alt='' fill/>
+                <Image src={singleProduct.img || "/noavatar.png"} alt='' fill/>
             </div>
-            {title}
+            {singleProduct.title}
         </div>
         <div className={styles.formContainer}>
-            <form className={styles.form}>
+            <form action={UpdateProduct} className={styles.form}>
+            <input type="text" hidden value={singleProduct.id} name='id' />
             <label>Title</label>
-            <input type="text" name='title' placeholder='Iphone' />
+            <input type="text" name='title' placeholder={singleProduct.title} />
             <label>Price</label>
-            <input type="number" name='price' placeholder='$999' />
+            <input type="number" name='price' placeholder={singleProduct.price} />
             <label>Stock</label>
-            <input type="number" name='stock' placeholder='23' />
+            <input type="number" name='stock' placeholder={singleProduct.stock} />
             <label>Color</label>
-            <input type="text" name='color' placeholder='silver' />
+            <input type="text" name='color' placeholder={singleProduct.color} />
             <label>Size</label>
-            <input name="size" placeholder='large' type="text"/>
+            <input name="size" placeholder={singleProduct.size} type="text"/>
             <label>Cat</label>
             <select name="cat" id="cat">
                 <option value="general">Choose a Category</option>
@@ -46,7 +39,7 @@ async function SingleProductPage({params}) {
             <textarea name="desc" 
                 id="desc" 
                 rows="16" 
-                placeholder='Desciption'>
+                placeholder={singleProduct.desc}>
 
             </textarea>
             <button type='submit'>Update</button>
