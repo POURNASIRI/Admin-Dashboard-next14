@@ -3,6 +3,7 @@ import { Product, User } from "./models"
 import { ConnectToDB } from "./utils"
 import { redirect } from "next/navigation"
 import bcrypt from "bcrypt"
+import { signIn } from "../auth"
 
 
 export const AddUser  = async (formData)=>{
@@ -177,4 +178,21 @@ export const UpdateProduct  = async (formData)=>{
     }
     revalidatePath("/dashboard/products")
     redirect("/dashboard/products")
+}
+
+
+// login
+
+export const authentication = async (formData)=>{
+    'use server'
+    console.log(formData)
+        const {username,password} = Object.fromEntries(formData)
+
+        try {
+            await signIn("credentials",{username,password});
+            
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
 }
