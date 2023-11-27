@@ -20,7 +20,7 @@ const login = async (credentials)=>{
         return user
 
     } catch (error) {
-        console.log(err)
+        console.log(error)
         throw new Error ("Failed to login!")
     }
 }
