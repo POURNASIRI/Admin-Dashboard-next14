@@ -19,8 +19,8 @@ const login = async (credentials)=>{
 
         return user
 
-    } catch (error) {
-        console.log(error)
+    } catch (err) {
+        console.log(err)
         throw new Error ("Failed to login!")
     }
 }
