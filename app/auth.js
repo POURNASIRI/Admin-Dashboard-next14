@@ -1,9 +1,10 @@
-import NextAuth from "next-auth"
+
 import CredentialsProvider from "next-auth/providers/credentials"
 import { authConfig } from "./authconfig"
 import { ConnectToDB } from "./lib/utils"
 import { User } from "./lib/models"
 import bcyipt from "bcrypt"
+import NextAuth from "next-auth"
 
 const login = async (credentials)=>{
     try {
@@ -28,7 +29,7 @@ const login = async (credentials)=>{
 
 
 
-export const {signIn,sigOut,auth} =  NextAuth({
+export const {signIn,signOut,auth} =  NextAuth({
     ...authConfig,
   providers: [
     CredentialsProvider({
@@ -43,4 +44,22 @@ export const {signIn,sigOut,auth} =  NextAuth({
       },
     }),
   ],
+  callbacks:{
+    async jwt({token,user}){
+
+        if(user){
+          token.username = user.username;
+          token.img = user.img
+        }
+        return token
+    },
+    async session({session,token}){
+
+        if(token){
+          session.user.username = token.username;
+          session.user.img = token.img
+        }
+        return token
+    }
+  }
 })

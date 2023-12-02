@@ -1,3 +1,5 @@
+"use server"
+
 import { revalidatePath } from "next/cache"
 import { Product, User } from "./models"
 import { ConnectToDB } from "./utils"
@@ -8,7 +10,7 @@ import { signIn } from "../auth"
 
 export const AddUser  = async (formData)=>{
 
-    "use server"
+    
 
     const {username,email,password,phoneNumber,address,isAdmin,isActive} =
     Object.fromEntries(formData)
@@ -43,7 +45,7 @@ export const AddUser  = async (formData)=>{
 }
 export const UpdateUser  = async (formData)=>{
 
-    "use server"
+    
     const {id,username,email,password,phoneNumber,address,isAdmin,isActive} = 
     Object.fromEntries(formData)
     try {
@@ -77,7 +79,7 @@ export const UpdateUser  = async (formData)=>{
 
 export const DeleteUser  = async (formData)=>{
 
-    "use server"
+    
 
     const {id} = 
     Object.fromEntries(formData)
@@ -98,7 +100,7 @@ export const DeleteUser  = async (formData)=>{
 
 export const AddProduct  = async (formData)=>{
 
-    "use server"
+    
 
     const {title,desc,price,stock,color,size} = 
     Object.fromEntries(formData)
@@ -128,7 +130,7 @@ export const AddProduct  = async (formData)=>{
 
 export const DeleteProduct  = async (formData)=>{
 
-    "use server"
+    
 
     const {id} = 
     Object.fromEntries(formData)
@@ -148,7 +150,7 @@ export const DeleteProduct  = async (formData)=>{
 
 export const UpdateProduct  = async (formData)=>{
 
-    "use server"
+    
 
     const {id,title,desc,price,stock,color,size} = 
     Object.fromEntries(formData)
@@ -183,16 +185,12 @@ export const UpdateProduct  = async (formData)=>{
 
 // login
 
-export const authentication = async (formData)=>{
-    'use server'
-    console.log(formData)
-        const {username,password} = Object.fromEntries(formData)
-
-        try {
-            await signIn("credentials",{username,password});
-            
-        } catch (error) {
-            console.log(error)
-            throw error
-        }
-}
+export const authenticate = async (prevState, formData) => {
+    const {username,password} = Object.fromEntries(formData)
+  
+    try {
+      await signIn("credentials", { username, password });
+    } catch (err) {
+      return "Wrong Credentials!";
+    }
+  };

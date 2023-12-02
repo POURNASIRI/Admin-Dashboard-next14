@@ -13,7 +13,7 @@ import {
 } from "react-icons/md";
 import MenuLinks from './MenuLinks';
 import Image from 'next/image';
-import { auth } from '@/app/auth';
+import { auth, signOut } from '@/app/auth';
 
 const menuItems = [
   {
@@ -81,15 +81,15 @@ const menuItems = [
 
 async function Sidebare() {
 
-  const userinfo = await auth()
-  console.log(userinfo)
+  const {user} = await auth()
+  console.log(user)
   return (
     <div className={styles.container}>
       <div className={styles.user}>
-         <Image className={styles.userImage} src="/noavatar.png" alt='' width="50" height="50"/>
+         <Image className={styles.userImage} src={user.img ||"/noavatar.png"} alt='' width="50" height="50"/>
          <div className={styles.userInfo}>
-          <span className={styles.username}>Erfan</span>
-          <span className={styles.lastname}>PM</span>
+          <span className={styles.username}>{user.username}</span>
+          <span className={styles.lastname}>{}</span>
          </div>
       </div>
       <ul className={styles.list}>
@@ -106,10 +106,17 @@ async function Sidebare() {
         ))
       }
       </ul>
-      <button className={styles.logout}>
-        <MdLogout/>
-        Logout
+      <form
+        action={async () => {
+          "use server";
+          await signOut();
+        }}
+      >
+        <button className={styles.logout}>
+          <MdLogout />
+          Logout
         </button>
+      </form>
     </div>
   )
 }

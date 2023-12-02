@@ -14,7 +14,7 @@ import Image from 'next/image'
     const {id} = params
     const singleUser = await fetchSingleUserData (id)
     
-    console.log(singleUser.phoneNumber)
+   
        
   return (
     <div className={styles.container}>
